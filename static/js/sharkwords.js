@@ -50,7 +50,10 @@ const isLetterInWord = (letter) => document.querySelector(`div.${letter}`) !== n
 // Called when `letter` is in word. Update contents of divs with `letter`.
 //
 const handleCorrectGuess = (letter) => {
-  // Replace this with your code
+  const letterDivs = document.querySelectorAll(`div.${letter}`);
+  for (const div of letterDivs) {
+    div.innerHTML = letter;
+  }
 };
 
 //
@@ -81,9 +84,21 @@ const resetGame = () => {
 
   for (const button of document.querySelectorAll('button')) {
     // add an event handler to handle clicking on a letter button
-    // YOUR CODE HERE
+    button.addEventListener('click', (evt) => {
+      const currentButton = evt.target
+      const letter = currentButton.innerHTML;
+      disableLetterButton(currentButton);
+      if (isLetterInWord(letter) == true) {
+        handleCorrectGuess(letter);
+      } else {
+        handleWrongGuess(letter);
+      }
+    });
+  // }letterButton.addEventListener('click', function() {
+    // if (isWrongGuess('A')) {
+      // letterButton.disabled = true;
+  
   }
-
   // add an event handler to handle clicking on the Play Again button
   // YOUR CODE HERE
 })();
