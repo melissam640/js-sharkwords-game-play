@@ -53,7 +53,7 @@ const handleCorrectGuess = (letter) => {
   const letterDivs = document.querySelectorAll(`div.${letter}`);
   for (const div of letterDivs) {
     div.innerHTML = letter;
-  }
+  }  
 };
 
 //
@@ -66,14 +66,14 @@ const handleCorrectGuess = (letter) => {
 const handleWrongGuess = () => {
   numWrong += 1;
   
-  sharkImage = document.querySelector('img');
+  const sharkImage = document.querySelector('img');
   sharkImage.setAttribute('src', `/static/images/guess${numWrong}.png`)
 
   if (numWrong === 5) {
     for (const button of document.querySelectorAll('button')) {
       disableLetterButton(button);
     }
-    losingMessage = document.querySelector('a');
+    const losingMessage = document.querySelector('#play-again');
     losingMessage.setAttribute('style', 'display: block;');
   }
 };
@@ -88,7 +88,8 @@ const resetGame = () => {
 (function startGame() {
   // For now, we'll hardcode the word that the user has to guess.
   const word = 'hello';
-
+  const wordLength = word.length
+  
   createDivsForChars(word);
   generateLetterButtons();
 
@@ -99,7 +100,7 @@ const resetGame = () => {
       const letter = currentButton.innerHTML;
       disableLetterButton(currentButton);
       if (isLetterInWord(letter) == true) {
-        handleCorrectGuess(letter);
+        handleCorrectGuess(letter, wordLength);
       } else {
         handleWrongGuess(letter);
       }
@@ -107,5 +108,10 @@ const resetGame = () => {
   
   }
   // add an event handler to handle clicking on the Play Again button
-  // YOUR CODE HERE
+  for (const message of document.querySelectorAll('a')) {
+    message.addEventListener('click', () => {
+    resetGame();
+    });
+  }
+  
 })();
