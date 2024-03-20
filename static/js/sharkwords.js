@@ -65,7 +65,13 @@ const handleCorrectGuess = (letter) => {
 
 const handleWrongGuess = () => {
   numWrong += 1;
-  // Replace this with your code
+  if (numWrong === 5) {
+    for (const button of document.querySelectorAll('button')) {
+      disableLetterButton(button);
+    }
+    message = document.querySelector('a');
+    message.setAttribute('style', 'display: block;');
+  }
 };
 
 //  Reset game state. Called before restarting the game.
@@ -94,9 +100,6 @@ const resetGame = () => {
         handleWrongGuess(letter);
       }
     });
-  // }letterButton.addEventListener('click', function() {
-    // if (isWrongGuess('A')) {
-      // letterButton.disabled = true;
   
   }
   // add an event handler to handle clicking on the Play Again button
