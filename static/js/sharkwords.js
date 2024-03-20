@@ -65,12 +65,16 @@ const handleCorrectGuess = (letter) => {
 
 const handleWrongGuess = () => {
   numWrong += 1;
+  
+  sharkImage = document.querySelector('img');
+  sharkImage.setAttribute('src', `/static/images/guess${numWrong}.png`)
+
   if (numWrong === 5) {
     for (const button of document.querySelectorAll('button')) {
       disableLetterButton(button);
     }
-    message = document.querySelector('a');
-    message.setAttribute('style', 'display: block;');
+    losingMessage = document.querySelector('a');
+    losingMessage.setAttribute('style', 'display: block;');
   }
 };
 
